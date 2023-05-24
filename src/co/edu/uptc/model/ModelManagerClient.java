@@ -37,7 +37,7 @@ public class ModelManagerClient implements Contract.Model {
         DataInput dataInputStream = client.getDataInputStream();
         Gson gson = new Gson();
         try {
-            while (!((info = dataInputStream.readUTF()) == null)) {
+            while (((info = dataInputStream.readUTF()) != null)) {
                 //System.out.println(info);
                 infoFromServer = gson.fromJson(info, InfoFromServer.class);
                 rectangle = infoFromServer.getFigureInformation().getRectangle();
