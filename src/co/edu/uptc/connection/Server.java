@@ -1,5 +1,4 @@
 package co.edu.uptc.connection;
-
 import co.edu.uptc.utils.Utils;
 
 import java.io.DataInputStream;
@@ -16,9 +15,10 @@ public class Server {
     private DataInputStream dataInputStream;
 
     public Server(String host, int port) {
-        init(host, port);
+        connection = new Connection("server", host, port);
+        connection.connect();
         socketList = new LinkedList<>();
-        System.out.println("estado del server " + connection.getHost());
+        System.out.println("El servidor " + connection.getHost());
         Thread runConnection = new Thread(() -> {
             while (true)
                 tryConnection();
@@ -40,11 +40,6 @@ public class Server {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    public void init(String host, int port) {
-        connection = new Connection("server", host, port);
-        connection.connect();
     }
 
     public void setConnection(Connection connection) {
