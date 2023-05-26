@@ -28,11 +28,11 @@ public class Connection {
 
     private void internalConnect() throws IOException {
         switch (type) {
-            case "server" -> {
+            case "server" : {
                 serverSocket = new ServerSocket(port);
                 socket = new Socket();
             }
-            case "client" -> {
+            case "client" : {
                 socket = new Socket(host, port);
             }
         }
