@@ -13,9 +13,9 @@ public class GeneralManager {
     public GeneralManager(String connectionType, String ip, int port) {
         view = new View();
         presenter = new Presenter();
-        switch (connectionType.toLowerCase()) {
-            case "client" -> model = new ModelManagerClient(ip, port);
-            case "server" -> model = new ModelManagerServer(ip, port);
+        switch (connectionType.toLowerCase()){
+            case "client" : model = new ModelManagerClient(ip, port);
+            case "server" : model = new ModelManagerServer(ip, port);
         }
         createMVP();
     }
@@ -37,6 +37,7 @@ public class GeneralManager {
             String connectionType = args[0];
             String ip = args[1];
             int port = Integer.parseInt(args[2]);
+            System.out.println(Utils.getGreenMessage() + "\nConexi\u00f3n: " + connectionType + "\nIP: " + ip + "\nPuerto: " + port + "\n" + Utils.getResetMessage());
             new GeneralManager(connectionType, ip, port).runProject();
         } else {
             System.out.println(Utils.getRedMessage() + "\nError: Debe ingresar el tipo de conexi\u00f3n y la direcci\u00f3n IP y el puerto del servidor");
