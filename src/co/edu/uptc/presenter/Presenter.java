@@ -30,4 +30,9 @@ public class Presenter implements Contract.Presenter {
     public void updateCoordinates(Point point) {
         model.updateRectanglePosition(point);
     }
+
+    @Override
+    public void showMessage(String message) {
+
+    }
 }

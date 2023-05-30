@@ -5,11 +5,11 @@ import co.edu.uptc.presenter.Contract;
 import javax.swing.*;
 import java.awt.*;
 
-public class View extends JFrame implements Contract.View {
+public class MyFrame extends JFrame implements Contract.View {
     private Contract.Presenter presenter;
-    private MainPanel mainPanel;
+    private PrincipalPanel mainPanel;
 
-    public View() {
+    public MyFrame() {
         setTitle("Rectangle");
         setSize(700, 700);
         setLocationRelativeTo(null);
@@ -18,7 +18,7 @@ public class View extends JFrame implements Contract.View {
     }
 
     private void initComponent() {
-        mainPanel = new MainPanel(presenter);
+        mainPanel = new PrincipalPanel(presenter);
         add(mainPanel);
     }
 
@@ -31,6 +31,11 @@ public class View extends JFrame implements Contract.View {
     @Override
     public void start() {
         setVisible(true);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        System.out.println(message);
     }
 
     @Override

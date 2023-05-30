@@ -1,5 +1,6 @@
 package co.edu.uptc.connection;
-import co.edu.uptc.utils.Utils;
+
+import co.edu.uptc.utils.ColorUtils;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -28,18 +29,28 @@ public class Server {
 
     private void tryConnection() {
         try {
-            System.out.println(Utils.getGreenMessage() + "Esperando..." + Utils.getResetMessage());
+            System.out.println(ColorUtils.GREEN + "Esperando..." + ColorUtils.RESET);
             Socket socket = connection.getServerSocket().accept();
             synchronized (socketList) {
                 socketList.add(socket);
             }
-            System.out.println(Utils.getGreenMessage() + "Conectado" + Utils.getResetMessage());
-            System.out.println(Utils.getPurpleMessage() + "receiveData: " + socketList.size() + Utils.getResetMessage());
+            System.out.println(ColorUtils.GREEN + "Conectado" + ColorUtils.RESET);
+            System.out.println(ColorUtils.PURPLE + "receiveData: " + socketList.size() + ColorUtils.RESET);
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+    public void start() {
+        System.out.println(ColorUtils.GREEN + "Direccion del servidor " + connection.getHost());
+        System.out.println(ColorUtils.GREEN + "Puerto del servidor " + connection.getPort());
+        Thread runConnection = new Thread(() -> {
+            while (true) {
+                tryConnection();
+            }
+        });
+        runConnection.start();
     }
 
     public void setConnection(Connection connection) {
