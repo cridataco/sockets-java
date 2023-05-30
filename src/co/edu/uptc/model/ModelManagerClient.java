@@ -69,4 +69,9 @@ public class ModelManagerClient implements Contract.Model {
     public int getColorPanel() {
         return infoFromServer.getPanelInformation().getColor();
     }
+
+    @Override
+    public void startServer() {
+
+    }
 }

@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class MainPanel extends JPanel implements MouseListener, MouseMotionListener {
+public class PrincipalPanel extends JPanel implements MouseListener, MouseMotionListener {
     private Contract.Presenter presenter;
     private Rectangle rectangle;
     private Graphics2D g2d;
@@ -17,7 +17,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseMotionListe
     private int colorRectangle;
     private int colorPanel;
 
-    public MainPanel(Contract.Presenter presenter) {
+    public PrincipalPanel(Contract.Presenter presenter) {
         this.presenter = presenter;
         rectangle = new Rectangle();
         colorPanel = 0;

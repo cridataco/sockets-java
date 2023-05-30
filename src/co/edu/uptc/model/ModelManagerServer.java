@@ -2,15 +2,13 @@ package co.edu.uptc.model;
 
 import co.edu.uptc.connection.Server;
 import co.edu.uptc.presenter.Contract;
-import co.edu.uptc.utils.Utils;
-import com.google.gson.Gson;
+import co.edu.uptc.utils.ColorUtils;
 
 import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.util.LinkedList;
@@ -40,8 +38,6 @@ public class ModelManagerServer implements Contract.Model {
     @Override
     public void loadData() {
         updateAllClients();
-        SecureRandom random = Utils.getSecureRandom("DRBG");
-        rectangle = new Rectangle(random.nextInt(100), random.nextInt(100), 50, 50);
         presenter.updateView();
         Thread repaintThread = new Thread(() -> {
             while (true)
@@ -80,8 +76,8 @@ public class ModelManagerServer implements Contract.Model {
                     dataOutputStream.writeUTF(info);
                 } catch (SocketException socketException) {
                     socketList.remove(socket);
-                    System.out.println(Utils.getCyanMessage() + "Client disconnected" + Utils.getResetMessage());
-                    System.out.println(Utils.getPurpleMessage() + "Clients connected: " + socketList.size() + Utils.getResetMessage());
+                    presenter.showMessage(ColorUtils.CYAN + "Client disconnected" + ColorUtils.RESET);
+                    presenter.showMessage(ColorUtils.PURPLE + "Clients connected: " + socketList.size() + ColorUtils.RESET);
                     break;
                 } catch (IOException e) {
                     System.out.println("Error: " + e.getMessage());
@@ -112,8 +108,8 @@ public class ModelManagerServer implements Contract.Model {
 
                 } catch (SocketException socketException) {
                     socketList.remove(socket);
-                    System.out.println(Utils.getCyanMessage() + "Client disconnected" + Utils.getResetMessage());
-                    System.out.println(Utils.getPurpleMessage() + "Clients connected: " + socketList.size() + Utils.getResetMessage());
+                    presenter.showMessage(ColorUtils.CYAN + "Client disconnected" + ColorUtils.RESET);
+                    presenter.showMessage(ColorUtils.PURPLE + "Clients connected: " + socketList.size() + ColorUtils.RESET);
                     break;
                 } catch (IOException e) {
                     System.out.println("Error: " + e.getMessage());
@@ -142,5 +138,11 @@ public class ModelManagerServer implements Contract.Model {
     @Override
     public int getColorPanel() {
         return 0;
+    }
+
+    @Override
+    public void startServer() {
+        server.start();
+        presenter.showMessage(ColorUtils.PURPLE + "Server started" + ColorUtils.RESET);
     }
 }

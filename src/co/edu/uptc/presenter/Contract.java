@@ -8,6 +8,8 @@ public interface Contract {
 
         void start();
 
+        void showMessage(String message);
+
         void updateView(Rectangle rectangle, int colorRectangle, int colorPanel);
     }
 
@@ -21,6 +23,8 @@ public interface Contract {
         void updateView();
 
         void updateCoordinates(Point point);
+
+        void showMessage(String message);
     }
 
     interface Model {
@@ -35,5 +39,7 @@ public interface Contract {
         int getColorRectangle();
 
         int getColorPanel();
+
+        void startServer();
     }
 }
